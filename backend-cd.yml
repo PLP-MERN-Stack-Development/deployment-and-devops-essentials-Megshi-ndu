@@ -1,0 +1,21 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'server/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to Heroku/Render
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is an example action for Heroku
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "your-backend-app-name" # Replace with your app name
+          heroku_email: "your-email@example.com" # Replace with your email
+          appdir: "server" # Location of the backend code
